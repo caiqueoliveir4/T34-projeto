@@ -9,10 +9,10 @@
 <div *ngIf="people$ | async; let people">
     <ul>
         <li *ngFor=" let p of people">
-            {{p.name}} <br>
-            {{p.age}} <br>
-            {{p.company}} <br>
-            <a href="mailto:{{p.email}}">e-mail</a>
+            Nome: {{p.name}} <br>
+            Idade: {{p.age}} <br>
+            Empresa: {{p.company}} <br>
+            E-mail: <a href="mailto:{{p.email}}">e-mail</a>
         </li>
     </ul>
 </div>

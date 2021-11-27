@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MainRoutingModule } from './main-routing.module';
 import { MainPeopleComponent } from './view/main-people/main-people.component';
 import { MaterialModule } from '../material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -13,7 +14,9 @@ import { MaterialModule } from '../material.module';
   imports: [
     CommonModule,
     MainRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FlexLayoutModule,
+    
   ]
 })
 export class MainModule { }

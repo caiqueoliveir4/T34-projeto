@@ -8,6 +8,6 @@ import { User } from './mauth/model/user';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  user!: Observable<User>;
-  authenticated!: Observable<boolean>;
+  user$!: Observable<User>;
+  authenticated$!: Observable<boolean>;
 }

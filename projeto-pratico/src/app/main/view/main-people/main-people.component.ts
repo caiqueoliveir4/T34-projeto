@@ -16,7 +16,8 @@ export class MainPeopleComponent implements OnInit {
   constructor(private mainService: MainService) { }
 
   ngOnInit(): void {
-    this.people$ = this.mainService.getPeople(); 
+    this.people$ = this.mainService.getPeople();
+    console.log(this.generate()); 
   }
 
   addOne() {
@@ -26,8 +27,8 @@ export class MainPeopleComponent implements OnInit {
       email: faker.internet.email(),
       company: faker.company.companyName(),
       country: faker.address.country()
-
     } 
+    this.mainService.addPerson(p);
   }
 
   generate() {
