@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MauthRoutingModule } from './mauth-routing.module';
 import { LoginComponent } from './view/login/login.component';
+import { MaterialModule } from '../material.module';
 
 
 
@@ -12,7 +13,8 @@ import { LoginComponent } from './view/login/login.component';
   ],
   imports: [
     CommonModule,
-    MauthRoutingModule
+    MauthRoutingModule,
+    MaterialModule
   ]
 })
 export class MauthModule { }
