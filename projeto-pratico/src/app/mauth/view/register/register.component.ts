@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { User } from './../../model/user';
-import { timeout } from 'rxjs/operators';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private autenticaService: AutenticaService, 
+    private autenticaService: AuthService, 
     private snackBar: MatSnackBar,
     private router: Router,
   ) { }

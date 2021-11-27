@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { AuthService } from '../../service/auth.service';
+import { User } from './../../model/user';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,7 @@ export class LoginComponent implements OnInit {
   loading = false;
 
   constructor(
-    private autenticaService: AutenticaService,
+    private autenticaService: AuthService,
     private snackBar: MatSnackBar,
     private router: Router,
     private fb: FormBuilder,
@@ -28,12 +30,11 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    const credencials = this.loginForm.value;
+    const cred = this.loginForm.value;
     this.loading = true;
-    this.autenticaService.login(credencials)
+    this.autenticaService.login(cred.email, cred.password)
     .subscribe(
       user => {
-        console.log(user);
         this.snackBar.open('logged in succcessfuly. welcome' + user.firstName + '!', 'OK', {duration: 3000});
         this.router.navigateByUrl('/');
         this.loading = false;
@@ -50,4 +51,4 @@ export class LoginComponent implements OnInit {
 }
 
 
-}
+

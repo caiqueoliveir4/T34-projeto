@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { MauthModule } from './mauth/mauth.module';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,15 +22,23 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
   ],
   imports: [
  
-  BrowserModule,
+    BrowserModule,
+    MauthModule,
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    MauthModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+   
+
+  ],
+  exports: [
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

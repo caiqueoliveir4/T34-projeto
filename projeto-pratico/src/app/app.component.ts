@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { observable, Observable } from 'rxjs';
 import { User } from './mauth/model/user';
 
 @Component({
@@ -8,6 +8,6 @@ import { User } from './mauth/model/user';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  user$!: Observable<User>;
-  authenticated$!: Observable<boolean>;
+  user$: Observable<User> = new Observable<User>();
+  authenticated$: Observable<boolean> = new Observable<boolean>();
 }

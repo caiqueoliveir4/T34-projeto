@@ -4,6 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { User } from './../model/user';
 import { from, Observable, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
+import { FirebaseApp } from '@angular/fire/app';
 
 
 
@@ -32,10 +33,10 @@ export class AuthService {
       )
     }
 
-    login(email: string, password: string): Observable<User> {
+    login(email: string, password: string): Observable<any> {
        return from(this.afAuth.signInWithEmailAndPassword(email, password))
        .pipe(
-         switchMap((u: any) => this.userCollection.doc<any>(u.user.uid).valueChanges()),
+         switchMap((u: any) => this.userCollection.doc<User>(u.user.uid).valueChanges()),
          catchError(() =>  throwError('Invalid Credentials or user is not registered.'))
        )
     }
