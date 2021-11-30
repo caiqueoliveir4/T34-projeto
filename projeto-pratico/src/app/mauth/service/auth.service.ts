@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { User } from './../model/user';
-import { from, Observable, throwError } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
+import { from, Observable, of, throwError } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { FirebaseApp } from '@angular/fire/app';
 
 
@@ -43,6 +43,18 @@ export class AuthService {
 
     logout() {
       this.afAuth.signOut();
+    }
+
+    getUser(): Observable<any> {
+      return this.afAuth.authState
+      .pipe(
+        switchMap(u => (u) ? this.userCollection.doc<User>(u.uid).valueChanges() : of(null))
+      )
+    }
+
+    authenticated(): Observable<boolean> {
+      return this.afAuth.authState
+      .pipe(map(u => (u) ? true : false))
     }
 
 }
