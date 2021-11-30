@@ -48,6 +48,25 @@ export class LoginComponent implements OnInit {
     )
 
   }
+
+  loginGoogle() {
+    this.loading = true
+    this.autenticaService.loginGoogle()
+    .subscribe(
+      (u) => {
+        this.snackBar.open('logged in succcessfuly. welcome' + u.firstName + '!', 'OK', {duration: 3000});
+        this.router.navigateByUrl('/');
+        this.loading = false;
+      },
+      (err) => {
+        console.log(err);
+        this.snackBar.open('login Error', 'OK', {duration: 3000});
+        this.loading = false;
+      }
+    );
+  }
+
+
 }
 
 

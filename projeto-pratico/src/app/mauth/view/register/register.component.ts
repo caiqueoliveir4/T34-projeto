@@ -61,7 +61,7 @@ onSubmit() {
     (u) => {
       this.snackBar.open('successfuly register. Use  your credentials to sing in'
       , 'OK', {duration: 2000})
-      this.router.navigateByUrl('autenticacao/login');
+      this.router.navigateByUrl('auth/login');
       
     },
     (err) => {

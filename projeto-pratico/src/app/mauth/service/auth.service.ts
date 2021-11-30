@@ -3,8 +3,12 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { User } from './../model/user';
 import { from, Observable, of, throwError } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
-import { FirebaseApp } from '@angular/fire/app';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import firebase from 'firebase/compat/app';
+
+
+
+
 
 
 
@@ -55,6 +59,43 @@ export class AuthService {
     authenticated(): Observable<boolean> {
       return this.afAuth.authState
       .pipe(map(u => (u) ? true : false))
+    }
+
+    async updateUserDate(u: firebase.auth.UserCredential) {
+      try {
+        const newUser: any ={
+          firstName: u.user?.displayName,
+          lastName: '', address: '',city: '',
+          state: '', phone: '', mobilePhone: '',
+          email: u.user?.email,
+          password: u.user?.uid
+        };
+         await this.userCollection.doc(u.user?.uid)
+        .set(newUser);
+        return newUser
+        
+      } catch (e) {
+        console.log(e);
+        throw new Error('Erro')
+      }
+    }
+
+    async loginWithGoogleAccont() {
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        let credentials: firebase.auth.UserCredential = await this.afAuth.signInWithPopup(provider);
+        let user: any = await this.updateUserDate(credentials)
+        return user
+      } catch (e) {
+        console.log(e);
+       throw new Error("Erro");
+       
+      }
+    }
+
+
+    loginGoogle(): Observable<any> {
+     return from(this.loginWithGoogleAccont());
     }
 
 }
